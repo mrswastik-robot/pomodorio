@@ -3,7 +3,7 @@
 import {arial} from '@/fonts/font'
 
 import { checkIfFocus, getTimeLeft } from "@/lib/utils"
-import { useState } from "react"
+import { useState , useEffect } from "react"
 
 import Navbar from "@/components/Navbar";
 import { Separator } from "@/components/ui/separator";
@@ -15,12 +15,20 @@ export default function Home() {
   const [isFocus , setIsFocus] = useState(() => checkIfFocus());
   const [timeLeft , setTimeLeft] = useState(() => getTimeLeft());
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft(getTimeLeft());
+      setIsFocus(checkIfFocus());
+    }, 900);
+    return () => clearInterval(interval);
+  } , [isFocus])
+
 
   return (
 
-    <div>
+    <div className={` ${checkIfFocus() ? 'bg-red-600' : 'bg-blue-400'}`}>
       <Navbar />
-      <Separator className=" h-4 my-4" />
+      <Separator className=" h-1 mt-[4rem] w-full" />
 
       <div className="flex flex-col items-center justify-center h-screen">
         <div className="flex flex-col items-center justify-center gap-4">
@@ -32,12 +40,12 @@ export default function Home() {
           </h2>
         </div>
         <div className="flex items-center justify-center gap-4">
-          <button className="px-4 py-2 bg-red-600 rounded-lg text-white font-bold text-xl">
+          {/* <button className="px-4 py-2 bg-red-600 rounded-lg text-white font-bold text-xl">
             Start
           </button>
           <button className="px-4 py-2 bg-red-600 rounded-lg text-white font-bold text-xl">
             Stop
-          </button>
+          </button> */}
         </div>
 
 
