@@ -2,7 +2,7 @@
 
 import {arial} from '@/fonts/font'
 
-import { checkIfFocus, getTimeLeft } from "@/lib/utils"
+import { checkIfFocus, formatTimeLeft, getTimeLeft } from "@/lib/utils"
 import { useState , useEffect } from "react"
 
 import Navbar from "@/components/Navbar";
@@ -15,13 +15,18 @@ export default function Home() {
   const [isFocus , setIsFocus] = useState(() => checkIfFocus());
   const [timeLeft , setTimeLeft] = useState(() => getTimeLeft());
 
+  const formattedTimeLeft = formatTimeLeft(timeLeft);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft(getTimeLeft());
       setIsFocus(checkIfFocus());
+
+      document.title = isFocus ? `Focus - ${formattedTimeLeft}` : `Break - ${formattedTimeLeft}`;
+
     }, 900);
     return () => clearInterval(interval);
-  } , [isFocus])
+  } , [isFocus , formattedTimeLeft])
 
 
   return (
@@ -33,7 +38,7 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center h-screen">
         <div className="flex flex-col items-center justify-center gap-4">
           <h1 className={` ${arial.className} text-9xl font-bold text-center`}>
-            {timeLeft}
+            {formattedTimeLeft}
           </h1>
           <h2 className="text-4xl font-bold text-center">
             {isFocus ? "Focus" : "Break"}

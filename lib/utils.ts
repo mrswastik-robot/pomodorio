@@ -46,3 +46,20 @@ export function isBetween(start: number, end: number, value: number)
 {
   return value >= start && value <= end;
 }
+
+export function formatTimeLeft(timeLeft: number)
+{
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(seconds).padStart(2, '0');
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+export function getPercentLeft(timeLeft: number , isFocus: boolean)
+{
+  const totalTime = isFocus ? FOCUS_TIME_TOTAL : BREAK_TIME_TOTAL;
+  return 100 - (timeLeft / totalTime) * 100;
+}
