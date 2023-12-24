@@ -6,8 +6,8 @@ import { checkIfFocus, formatTimeLeft, getPercentLeft, getTimeLeft } from "@/lib
 import { useState , useEffect } from "react"
 
 import Navbar from "@/components/Navbar";
-import { Separator } from "@/components/ui/separator";
 import Timer from '@/components/Timer';
+import Chat from '@/components/Chat';
 
 // import Image from 'next/image'
 
@@ -34,11 +34,12 @@ export default function Home() {
   return (
 
     <div className={` ${checkIfFocus() ? 'bg-red-600' : 'bg-blue-400'}`}>
-      <Navbar />
-      <Separator className=" h-1 mt-[4rem] w-full" />
+      <Navbar isFocus={isFocus}/>
+      {/* <Separator className="  w-full" /> */}
 
       <div className="flex flex-col items-center justify-center h-screen">
         <div className="flex flex-col items-center justify-center gap-4">
+          {isFocus ? null : <Chat />}
           <Timer 
             isFocus={isFocus}
             // timeLeft={timeLeft}
