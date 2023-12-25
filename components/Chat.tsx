@@ -9,6 +9,7 @@ import AuthModal from "./auth-modal";
 import { User, onAuthStateChanged } from "firebase/auth";
 import {auth, db} from '@/lib/firebase'
 import { DocumentData, addDoc, collection, serverTimestamp , orderBy , onSnapshot, query } from "firebase/firestore";
+import MessageContainer from "./MessageContainer";
 
 type Props = {
   isFocus: boolean;
@@ -35,7 +36,7 @@ const Chat = ({ isFocus }: Props) => {
         return () => unsubscribe();
     }, [])
 
-    console.log(messages);
+    // console.log(messages);
 
 
     useEffect(() => {
@@ -72,129 +73,10 @@ const Chat = ({ isFocus }: Props) => {
       <AuthModal isOpen={isOpen} setIsOpen={setIsOpen}/>
 
 
-      <div className=" overflow-y-auto md:h-[35rem] h-[26rem] no-scrollbar">
-        {/* Messages from other people (left side) */}
-        <div className="flex flex-col items-start mb-4">
-          {/* Example message */}
-          <div className="bg-gray-200 text-black py-2 px-4 rounded-3xl max-w-[70%]">
-            <p>Message from other people</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
-        {/* Messages from your side (right side) */}
-        <div className="flex flex-col items-end mb-4">
-          {/* Example message */}
-          <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white">
-            <p>Your message</p>
-          </div>
-          {/* Add more messages here */}
-        </div>
+      <div className=" overflow-y-auto md:h-[35rem] h-[25.5rem] no-scrollbar">
+        {messages.map((message) => (
+          <MessageContainer key={message.id} message={message} />
+        ))}
       </div>
 
 
