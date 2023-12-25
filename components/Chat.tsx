@@ -23,8 +23,23 @@ const Chat = ({ isFocus }: Props) => {
         });
     }, [])
 
+    function onSubmitMessage(event: React.SyntheticEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const content = String(formData.get('content'));
+
+        if(!user)
+        {
+            setIsOpen(true);
+        }
+    }
+
   return (
     <div className="relative md:w-[30rem] md:h-[40rem] w-[20rem] h-[31rem] border-4  rounded-3xl  flex flex-col p-3">
+
+      <AuthModal isOpen={isOpen} setIsOpen={setIsOpen}/>
+
+
       <div className=" overflow-y-auto md:h-[35rem] h-[26rem] no-scrollbar">
         {/* Messages from other people (left side) */}
         <div className="flex flex-col items-start mb-4">
@@ -157,7 +172,7 @@ const Chat = ({ isFocus }: Props) => {
 
 
       {/* Input box */}
-      <div className=" absolute right-1 left-1 bottom-1 border  border-1 border-transparent">
+      <form onSubmit={onSubmitMessage} className=" absolute right-1 left-1 bottom-1 border  border-1 border-transparent">
         <div
           className={`flex  items-center ${
             isFocus ? `bg-[#3B3B3B]` : `bg-blue-500`
@@ -165,6 +180,7 @@ const Chat = ({ isFocus }: Props) => {
         >
           <input
             type="text"
+            name="content"
             placeholder="Type your message..."
             className=" w-full flex-grow-0 border bg-[#3B3B3B] rounded-3xl py-2 px-4 mr-2 focus:outline-none border-transparent"
           />
@@ -176,7 +192,7 @@ const Chat = ({ isFocus }: Props) => {
             Send
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

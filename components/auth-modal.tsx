@@ -13,17 +13,36 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
+import { auth } from '@/lib/firebase'
+import { signInAnonymously , updateProfile} from 'firebase/auth'
+
 type Props = {
     isOpen: boolean;
-    setOpen: (isOpen: boolean) => void;
+    setIsOpen: (isOpen: boolean) => void;
 }
 
-const AuthModal = (props: Props) => {
+const AuthModal = ({isOpen , setIsOpen}: Props) => {
+
+  async function onSignIn(event: React.SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const username = String(formData.get('username'));
+
+    await signInAnonymously(auth);
+    if (auth.currentUser) {
+        await updateProfile(auth.currentUser,{
+            displayName: username
+        });
+    }
+    setIsOpen(false);
+  }
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Dialog open={isOpen}>
+      {/* <DialogTrigger asChild>
         <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger>
+      </DialogTrigger> */}
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Enter the chat!</DialogTitle>
@@ -31,13 +50,13 @@ const AuthModal = (props: Props) => {
             What name do you want to go by ?
           </DialogDescription>
         </DialogHeader>
-        <form>
+        <form onSubmit={onSignIn}>
             <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="username" className="text-right">
                 Name
                 </Label>
-                <Input id="username" value="Pedro Duarte" className="col-span-3" />
+                <Input id="username" name='username' className="col-span-3" />
             </div>
             </div>
             <DialogFooter>
