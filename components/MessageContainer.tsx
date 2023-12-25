@@ -1,33 +1,38 @@
-import { DocumentData } from 'firebase/firestore';
-import React from 'react'
+import { DocumentData } from "firebase/firestore";
+import React from "react";
+
+import { arial } from "@/fonts/font";
+import { User } from "firebase/auth";
 
 type Props = {
-    message: DocumentData;
-}
+  message: DocumentData;
+  user: User | null;
+};
 
-const MessageContainer = ({message}: Props) => {
+const MessageContainer = ({ message, user }: Props) => {
   return (
     <div>
-        {/* Messages from other people (left side) */}
+      {message.author != user?.displayName ? (
         <div className="flex flex-col items-start mb-4">
-          {/* Example message */}
           <div className="bg-gray-200 text-black py-2 px-4 rounded-3xl max-w-[70%]">
-            <p>{message.content}</p>
+            <p className={`${arial.className} uppercase font-bold text-xs`}>
+              {message.author}
+            </p>
+            <p className=" md:text-lg ">{message.content}</p>
           </div>
-          {/* Add more messages here */}
         </div>
-
-        {/* Messages from your side (right side) */}
-        {/* <div className="flex flex-col items-end mb-4"> */}
-          {/* Example message */}
-          {/* <div className="bg-blue-500 py-2 px-4 rounded-3xl max-w-[70%] text-white"> */}
-            {/* <p>Your message</p> */}
-          {/* </div> */}
-          {/* Add more messages here */}
-        {/* </div> */}
-        
+      ) : (
+        <div className="flex flex-col items-end mb-4">
+          <div className="bg-gray-200 text-black py-2 px-4 rounded-3xl max-w-[70%]">
+            <p className={`${arial.className} uppercase font-bold text-xs`}>
+              {message.author}
+            </p>
+            <p className=" md:text-lg ">{message.content}</p>
+          </div>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default MessageContainer
+export default MessageContainer;

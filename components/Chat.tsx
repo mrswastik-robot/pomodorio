@@ -44,6 +44,7 @@ const Chat = ({ isFocus }: Props) => {
             setUser(user);
         });
     }, [])
+    // console.log(user);
 
     async function onSubmitMessage(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -75,7 +76,7 @@ const Chat = ({ isFocus }: Props) => {
 
       <div className=" overflow-y-auto md:h-[35rem] h-[25.5rem] no-scrollbar">
         {messages.map((message) => (
-          <MessageContainer key={message.id} message={message} />
+          <MessageContainer key={message.id} message={message} user={user} />
         ))}
       </div>
 
