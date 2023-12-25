@@ -5,8 +5,10 @@ import { useState } from "react";
 import { arial } from "@/fonts/font";
 
 import AuthModal from "./auth-modal";
+
 import { User, onAuthStateChanged } from "firebase/auth";
-import {auth} from '@/lib/firebase'
+import {auth, db} from '@/lib/firebase'
+import { DocumentData, addDoc, collection, serverTimestamp , orderBy , onSnapshot, query } from "firebase/firestore";
 
 type Props = {
   isFocus: boolean;
@@ -16,6 +18,25 @@ const Chat = ({ isFocus }: Props) => {
 
     const [isOpen , setIsOpen] = useState(false);
     const [user , setUser] = useState<User | null>(null);
+    const [messages, setMessages] = useState<DocumentData[]>([]);
+
+    //getting all the messages using onSnapshot
+    useEffect(() => {
+        const unsubscribe = onSnapshot(
+          query(collection(db, 'messages'), orderBy('createdAt', 'asc')),
+          (snapshot) => {
+            const messages = snapshot.docs.map((doc) => ({
+              ...doc.data(),
+              id: doc.id,
+            }));
+            setMessages(messages);
+          }
+        );
+        return () => unsubscribe();
+    }, [])
+
+    console.log(messages);
+
 
     useEffect(() => {
         onAuthStateChanged(auth , (user) => {
@@ -23,7 +44,7 @@ const Chat = ({ isFocus }: Props) => {
         });
     }, [])
 
-    function onSubmitMessage(event: React.SyntheticEvent<HTMLFormElement>) {
+    async function onSubmitMessage(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const content = String(formData.get('content'));
@@ -31,6 +52,17 @@ const Chat = ({ isFocus }: Props) => {
         if(!user)
         {
             setIsOpen(true);
+        }
+        else{
+          const doc = await addDoc(collection(db , 'messages'), {
+            content,
+            createdAt: serverTimestamp(),
+            author: user.displayName,
+          });
+
+          (event.target as HTMLFormElement).reset();
+          document.querySelector(`#${doc.id}`) ?.scrollIntoView({behavior: 'smooth'});
+
         }
     }
 
