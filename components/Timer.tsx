@@ -35,7 +35,7 @@ const Timer = ({isFocus , formattedTimeLeft , progress}: Props) => {
         }}
         >
             <div className="flex flex-col items-center justify-center gap-2 mx-auto">
-                <p className="md:text-9xl text-5xl font-bold text-white md:w-[21.8rem] w-[8.2rem] text-center" >
+                <p className="md:text-9xl text-5xl font-bold text-white md:w-[21.8rem] w-[8.2rem]  text-center" >
                     {formattedTimeLeft}
                 </p>
                 <p className="md:text-2xl text-xl font-bold text-white">

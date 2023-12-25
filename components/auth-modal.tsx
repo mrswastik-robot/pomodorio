@@ -18,7 +18,7 @@ type Props = {
     setOpen: (isOpen: boolean) => void;
 }
 
-const authModal = (props: Props) => {
+const AuthModal = (props: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -49,4 +49,4 @@ const authModal = (props: Props) => {
   )
 }
 
-export default authModal
+export default AuthModal

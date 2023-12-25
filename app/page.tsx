@@ -37,16 +37,17 @@ export default function Home() {
       <Navbar isFocus={isFocus}/>
       {/* <Separator className="  w-full" /> */}
 
-      <div className="flex  items-center justify-center max-w-7xl mx-auto  h-screen">
-        <div className={`flex  items-center ${isFocus ? `justify-center` : `justify-between`} gap-24 w-full px-8 `}>
+      <div className="flex  items-center justify-center max-w-7xl mx-auto  md:h-screen ">
+        <div className={`flex flex-col md:flex-row space-y-6 justify-center mt-[50%] mb-5 md:mt-0 md:mb-0  items-center ${isFocus ? `justify-center` : `md:justify-between`} mx-auto gap-24 w-full  px-8 `}>
+          
           <Timer 
             isFocus={isFocus}
             // timeLeft={timeLeft}
             formattedTimeLeft={formattedTimeLeft}
             progress={progress}
           />
-          <Chat />
-          {/* {isFocus ? null : <Chat />} */}
+          <Chat isFocus={isFocus}/>
+          {/* {isFocus ? null : <Chat  isFocus={isFocus}/>} */}
 
         </div>
         <div className="flex items-center justify-center gap-4">
