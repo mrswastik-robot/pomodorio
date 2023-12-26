@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect  , useRef} from "react";
 
 import { useState } from "react";
 
@@ -20,6 +20,8 @@ const Chat = ({ isFocus }: Props) => {
     const [isOpen , setIsOpen] = useState(false);
     const [user , setUser] = useState<User | null>(null);
     const [messages, setMessages] = useState<DocumentData[]>([]);
+
+    const messagesEndRef = useRef<HTMLDivElement>(null);
 
     //getting all the messages using onSnapshot
     useEffect(() => {
@@ -46,6 +48,14 @@ const Chat = ({ isFocus }: Props) => {
     }, [])
     // console.log(user);
 
+     // Scroll to the latest message when messages change
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+  
+
     async function onSubmitMessage(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
@@ -63,7 +73,7 @@ const Chat = ({ isFocus }: Props) => {
           });
 
           (event.target as HTMLFormElement).reset();
-          document.querySelector(`#${doc.id}`) ?.scrollIntoView({behavior: 'smooth'});
+          // document.querySelector(`#${doc.id}`) ?.scrollIntoView({behavior: 'smooth'});
 
         }
     }
@@ -75,9 +85,12 @@ const Chat = ({ isFocus }: Props) => {
 
 
       <div className=" overflow-y-auto md:h-[35rem] h-[25.5rem] no-scrollbar">
-        {messages.map((message) => (
-          <MessageContainer key={message.id} message={message} user={user} />
+        {messages.map((message, index) => (
+          <MessageContainer key={message.id} message={message} user={user} 
+          ref={index === messages.length - 1 ? messagesEndRef : null}
+          />
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
 

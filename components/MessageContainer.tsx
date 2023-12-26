@@ -7,6 +7,7 @@ import { User } from "firebase/auth";
 type Props = {
   message: DocumentData;
   user: User | null;
+  ref: any;
 };
 
 const MessageContainer = ({ message, user }: Props) => {
