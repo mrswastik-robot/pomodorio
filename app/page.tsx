@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Timer from "@/components/Timer";
 import Chat from "@/components/Chat";
 import { Button } from "@/components/ui/button";
+import { DrawerContent } from "@/components/ui/drawer";
 
 export default function Home() {
   const INITIAL_FOCUS_TIME = 1 * 60;
