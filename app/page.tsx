@@ -111,7 +111,7 @@ export default function Home() {
   
   return (
     // <div className={` ${isFocus ? "bg-red-600" : "bg-blue-400"}`}>
-    <div className={` ${initialMode ? "bg-[#418B8B]" : `${isFocus ? 'bg-red-600' : 'bg-blue-400'}`}`}>
+    <div className={` ${isFocus ? 'bg-red-600' : 'bg-blue-400'}`}>
       <Navbar isFocus={isFocus} />
       <div className="flex items-center justify-center max-w-7xl mx-auto md:h-screen">
         <div className={`flex flex-col md:flex-row space-y-6 justify-center mt-[50%] mb-5 md:mt-0 md:mb-0 items-center ${isFocus ? "justify-center" : "md:justify-between"} mx-auto gap-24 w-full px-8`}>
@@ -129,6 +129,9 @@ export default function Home() {
             setNewBreakTime={setNewBreakTime}
 
             setProgress={setProgress}          //time drawer me change kr dene k baad circular progress beech me hi atak jaa raha tha , jarrori hain 0 set krna when changing timer via drawer
+
+            newFocusTime={newFocusTime}
+            newBreakTime={newBreakTime}        //useEffect me inme changes listen krne k liye ab inhe bhi bhejna padega
           />
           <Chat isFocus={isFocus} />
         </div>

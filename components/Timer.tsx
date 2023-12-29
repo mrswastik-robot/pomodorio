@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useState } from "react";
 
@@ -40,9 +40,12 @@ type Props = {
   setNewBreakTime: (newBreakTime: string) => void;
 
   setProgress: (progress: number) => void;
+
+  newFocusTime: string;
+  newBreakTime: string;
 };
 
-const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resumeTimer , resetTimer , setNewBreakTime , setNewFocusTime , setProgress}: Props) => {
+const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resumeTimer , resetTimer , setNewBreakTime , setNewFocusTime , setProgress , newFocusTime , newBreakTime}: Props) => {
 
 
   const [goalFocus, setGoalFocus] = useState(25);
@@ -56,14 +59,22 @@ const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resume
     setGoalBreak(Math.max(5, Math.min(55, goalBreak + adjustment)));
   }
 
-  async function handleSubmit()
+  useEffect(() => {
+    if(newFocusTime && newBreakTime)
+    {
+      resetTimer();
+    }
+  }, [newFocusTime , newBreakTime ]);
+
+  function handleSubmit()
   {
     setNewFocusTime(goalFocus.toString());
     setNewBreakTime(goalBreak.toString());
 
     setProgress(0);
 
-    await resetTimer();
+
+    // resetTimer();
   }
 
   return (
