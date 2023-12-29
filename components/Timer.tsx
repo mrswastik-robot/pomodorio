@@ -34,9 +34,15 @@ type Props = {
   pause: boolean;
   togglePause: () => void;
   resumeTimer: () => void;
+
+  resetTimer: () => void;
+  setNewFocusTime: (newFocusTime: string) => void;
+  setNewBreakTime: (newBreakTime: string) => void;
+
+  setProgress: (progress: number) => void;
 };
 
-const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resumeTimer}: Props) => {
+const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resumeTimer , resetTimer , setNewBreakTime , setNewFocusTime , setProgress}: Props) => {
 
 
   const [goalFocus, setGoalFocus] = useState(25);
@@ -48,6 +54,16 @@ const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resume
 
   function onClickBreak(adjustment: number) {
     setGoalBreak(Math.max(5, Math.min(55, goalBreak + adjustment)));
+  }
+
+  async function handleSubmit()
+  {
+    setNewFocusTime(goalFocus.toString());
+    setNewBreakTime(goalBreak.toString());
+
+    setProgress(0);
+
+    await resetTimer();
   }
 
   return (
@@ -185,9 +201,12 @@ const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resume
 
 
                 <DrawerFooter>
-                  <Button>Submit</Button>
                   <DrawerClose asChild>
-                    <Button variant="outline">Cancel</Button>
+                    <div className="  flex-row w-full space-y-2">
+                      <Button onClick={handleSubmit} className=" w-full">Submit</Button>
+                      <Button variant="outline" className=" w-full">Cancel</Button>
+                    </div>
+                    
                   </DrawerClose>
                 </DrawerFooter>
               </div>

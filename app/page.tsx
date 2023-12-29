@@ -91,8 +91,8 @@ export default function Home() {
     setPause(false);
   };
 
-  const resetTimer = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const resetTimer = () => {
+    // event.preventDefault();
     
     if (newFocusTime && newBreakTime) {
       setFocusTime(parseInt(newFocusTime, 10) * 60);
@@ -119,9 +119,16 @@ export default function Home() {
             isFocus={isFocus}
             formattedTimeLeft={formattedTimeLeft}
             progress={progress}
+
             pause={pause}
             togglePause={togglePause}
             resumeTimer={resumeTimer}
+
+            resetTimer={resetTimer}
+            setNewFocusTime={setNewFocusTime}
+            setNewBreakTime={setNewBreakTime}
+
+            setProgress={setProgress}          //time drawer me change kr dene k baad circular progress beech me hi atak jaa raha tha , jarrori hain 0 set krna when changing timer via drawer
           />
           <Chat isFocus={isFocus} />
         </div>
