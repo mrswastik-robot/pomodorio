@@ -79,12 +79,12 @@ const Chat = ({ isFocus }: Props) => {
     }
 
   return (
-    <div className="relative md:w-[30rem] md:h-[40rem] w-[20rem] h-[31rem] border-4  rounded-3xl  flex flex-col p-3">
+    <div className="relative md:w-[30rem] md:h-[45rem] w-[20rem] h-[31rem] border-4  rounded-3xl  flex flex-col p-3 ">
 
       <AuthModal isOpen={isOpen} setIsOpen={setIsOpen}/>
 
 
-      <div className=" overflow-y-auto md:h-[35rem] h-[25.5rem] no-scrollbar">
+      <div className=" overflow-y-auto md:h-[40rem] h-[25.5rem] no-scrollbar">
         {messages.map((message, index) => (
           <MessageContainer key={message.id} message={message} user={user} 
           ref={index === messages.length - 1 ? messagesEndRef : null}
