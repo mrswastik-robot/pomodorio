@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState} from 'react'
 
 import { Button } from "@/components/ui/button"
 import {
@@ -23,6 +23,8 @@ type Props = {
 
 const AuthModal = ({isOpen , setIsOpen}: Props) => {
 
+  const [inputValue , setInputValue] = useState('')       //send  button disable krne k liye
+
   async function onSignIn(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -36,7 +38,16 @@ const AuthModal = ({isOpen , setIsOpen}: Props) => {
         });
     }
     setIsOpen(false);
+
+    setInputValue('');
   }
+
+  //name agar empty chhod diye to submit button disable krna hoga
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  }
+
+  const isInputEmpty = inputValue.trim().length === 0;
 
   return (
     <Dialog open={isOpen}>
@@ -56,11 +67,11 @@ const AuthModal = ({isOpen , setIsOpen}: Props) => {
                 <Label htmlFor="username" className="text-right">
                 Name
                 </Label>
-                <Input id="username" name='username' className="col-span-3" />
+                <Input id="username" name='username' className="col-span-3" onChange={handleInputChange}/>
             </div>
             </div>
             <DialogFooter>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit" disabled={isInputEmpty}>Save changes</Button>
             </DialogFooter>
         </form>
       </DialogContent>

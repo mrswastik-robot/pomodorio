@@ -21,7 +21,11 @@ const Chat = ({ isFocus }: Props) => {
     const [user , setUser] = useState<User | null>(null);
     const [messages, setMessages] = useState<DocumentData[]>([]);
 
+    const [inputValue , setInputValue] = useState('')       //send  button disable krne k liye
+
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  
 
     //getting all the messages using onSnapshot
     useEffect(() => {
@@ -75,8 +79,17 @@ const Chat = ({ isFocus }: Props) => {
           (event.target as HTMLFormElement).reset();
           // document.querySelector(`#${doc.id}`) ?.scrollIntoView({behavior: 'smooth'});
 
+          setInputValue('');         //send button disable krne k liye
+
         }
     }
+
+    //send button disable krna hain agar khuch inputbox me type hi ni kiya
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.target.value);
+      }
+
+  const isInputEmpty = inputValue.trim().length === 0;
 
   return (
     <div className="relative md:w-[33rem] md:h-[45rem] w-[20rem] h-[31rem] border-4  rounded-3xl  flex flex-col p-3 ">
@@ -111,11 +124,13 @@ const Chat = ({ isFocus }: Props) => {
             name="content"
             placeholder="Type your message..."
             className={` w-full flex-grow-0 border ${isFocus ? `bg-[#3B3B3B]` : `bg-blue-600`}  text-white rounded-3xl py-2 px-4 mr-2 focus:outline-none border-transparent`}
+            onChange={handleInputChange}
           />
           <button
             className={`${isFocus ? `bg-red-600` : `bg-blue-800 text-white`} ${
               arial.className
             } text-gray-800 py-2 px-4 rounded-3xl`}
+            disabled={isInputEmpty}
           >
             Send
           </button>
