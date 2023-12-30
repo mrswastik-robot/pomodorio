@@ -87,21 +87,22 @@ const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resume
           styles={{
             path: {
               stroke: "#fff",
-              strokeLinecap: "butt",
-              // transition: 'stroke-dashoffset 0.5s ease 0s',
-              // transform: 'rotate(0.25turn)',
+              strokeLinecap: "round",
+              strokeWidth: "5",
+              transition: 'stroke-dashoffset 0.5s ease 0s',
+              transform: 'rotate(0.01turn)',
               transformOrigin: "center center",
             },
             trail: {
               stroke: "none",
-              strokeLinecap: "butt",
-              // transform: 'rotate(0.25turn)',
+              // strokeLinecap: "butt",
+              transform: 'rotate(0.01turn)',
               transformOrigin: "center center",
             },
           }}
         >
           <div className="flex flex-col items-center justify-center gap-2 mx-auto">
-            <p className="md:text-9xl text-5xl font-bold text-white md:w-[21.8rem] w-[8.2rem]  text-center">
+            <p className="md:text-9xl text-5xl font-bold text-white md:w-[21.5rem] w-[8.1rem]  text-center">
               {formattedTimeLeft}
             </p>
             <p className="md:text-2xl text-xl font-bold text-white">
