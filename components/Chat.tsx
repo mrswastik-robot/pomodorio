@@ -99,7 +99,7 @@ const Chat = ({ isFocus }: Props) => {
 
       <div className=" overflow-y-auto md:h-[40rem] h-[25.5rem] no-scrollbar">
         {messages.map((message, index) => (
-          <MessageContainer key={message.id} message={message} user={user} 
+          <MessageContainer key={message.id} message={message} user={user} isFocus={isFocus}
           ref={index === messages.length - 1 ? messagesEndRef : null}
           />
         ))}
@@ -129,7 +129,7 @@ const Chat = ({ isFocus }: Props) => {
           <button
             className={`${isFocus ? `bg-red-600` : `bg-blue-800 text-white`} ${
               arial.className
-            } text-gray-800 py-2 px-4 rounded-3xl`}
+            } text-gray-800 py-2 px-4 rounded-3xl disabled:text-gray-800/50`}
             disabled={isInputEmpty}
           >
             Send
