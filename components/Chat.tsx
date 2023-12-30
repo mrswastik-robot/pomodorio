@@ -79,7 +79,7 @@ const Chat = ({ isFocus }: Props) => {
     }
 
   return (
-    <div className="relative md:w-[30rem] md:h-[45rem] w-[20rem] h-[31rem] border-4  rounded-3xl  flex flex-col p-3 ">
+    <div className="relative md:w-[33rem] md:h-[45rem] w-[20rem] h-[31rem] border-4  rounded-3xl  flex flex-col p-3 ">
 
       <AuthModal isOpen={isOpen} setIsOpen={setIsOpen}/>
 

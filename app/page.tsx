@@ -114,7 +114,7 @@ export default function Home() {
     <div className={` ${isFocus ? 'bg-red-600' : 'bg-blue-400'}`}>
       <Navbar isFocus={isFocus} />
       <div className="flex items-center justify-center max-w-7xl mx-auto md:h-screen">
-        <div className={`flex flex-col md:flex-row space-y-6 justify-center mt-[50%] mb-5 md:mt-0 md:mb-0 items-center ${isFocus ? "justify-center" : "md:justify-between"} mx-auto gap-24 w-full px-8`}>
+        <div className={`flex flex-col md:flex-row space-y-6 justify-center mt-[50%] mb-5 md:mt-0 md:mb-0 items-center ${isFocus ? "justify-center" : "md:justify-between"} mx-auto gap-24 md:gap-20 w-full px-8`}>
           <Timer
             isFocus={isFocus}
             formattedTimeLeft={formattedTimeLeft}

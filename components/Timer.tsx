@@ -25,6 +25,12 @@ import {
 
 // import { Dialog } from './ui/dialog'
 
+import Image from "next/image";
+import play from '@/public/play.svg'
+import pauseSVG from '@/public/pause.svg'
+import settings from '@/public/settings.svg'
+import settingsPro from '@/public/settingsPro.svg'
+
 type Props = {
   isFocus: boolean;
   // timeLeft: number
@@ -112,27 +118,29 @@ const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resume
         </CircularProgressbarWithChildren>
       </div>
 
-      <div className=" md:h-[3rem] mt-7  flex items-center justify-center gap-2">
+      <div className=" md:h-[3rem] mt-7  flex items-center justify-center gap-3">
         {pause ? (
           <Button
             onClick={resumeTimer}
             className=" bg-white hover:bg-gray-200 h-full w-full text-black rounded-full"
           >
-            Resume
+            <Image src={play} width={40} height={40} alt="play" />
           </Button>
         ) : (
           <Button
             onClick={togglePause}
             className=" bg-white hover:bg-gray-200 h-full w-full text-black rounded-full"
           >
-            Pause
+            <Image src={pauseSVG} width={40} height={40} alt="pause" />
           </Button>
         )}
 
         <div className=" w-full h-full">
           <Drawer>
-            <DrawerTrigger asChild>
-              <Button variant="outline" className="bg-white hover:bg-gray-200 h-full w-full text-black rounded-full">Open Drawer</Button>
+            <DrawerTrigger asChild className=" w-full h-full">
+              <Button variant="outline" className="bg-white hover:bg-gray-200 h-full w-full text-black rounded-full">
+                <Image src={settingsPro}  alt="edit" width={40} height={20} className="  "/>
+              </Button>
             </DrawerTrigger>
             <DrawerContent>
               <div className="mx-auto w-full max-w-sm">
