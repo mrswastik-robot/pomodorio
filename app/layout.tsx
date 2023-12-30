@@ -19,9 +19,9 @@ export default function RootLayout({
     <html lang="en">
 
       <body className={`${inter.className} no-scrollbar`}>
-        <Providers>
+        {/* <Providers> */}
           {children}
-        </Providers>
+        {/* </Providers> */}
       </body>
 
     </html>

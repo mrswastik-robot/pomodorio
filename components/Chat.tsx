@@ -103,17 +103,17 @@ const Chat = ({ isFocus }: Props) => {
       <form onSubmit={onSubmitMessage} className=" absolute right-1 left-1 bottom-1 border  border-1 border-transparent">
         <div
           className={`flex  items-center ${
-            isFocus ? `bg-[#3B3B3B]` : `bg-blue-500`
+            isFocus ? `bg-[#3B3B3B]` : `bg-blue-600`
           } rounded-3xl p-2 `}
         >
           <input
             type="text"
             name="content"
             placeholder="Type your message..."
-            className=" w-full flex-grow-0 border bg-[#3B3B3B] rounded-3xl py-2 px-4 mr-2 focus:outline-none border-transparent"
+            className={` w-full flex-grow-0 border ${isFocus ? `bg-[#3B3B3B]` : `bg-blue-600`}  text-white rounded-3xl py-2 px-4 mr-2 focus:outline-none border-transparent`}
           />
           <button
-            className={`${isFocus ? `bg-red-600` : `bg-blue-800`} ${
+            className={`${isFocus ? `bg-red-600` : `bg-blue-800 text-white`} ${
               arial.className
             } text-gray-800 py-2 px-4 rounded-3xl`}
           >
