@@ -41,6 +41,26 @@ export default function Home() {
     audio?.play();
   }
 
+  // Prevent the user from accidentally reloading or leaving the page
+  useEffect(() => {
+    const handleWindowUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = 'Timer will be reset'; // Standard message for most browsers
+
+      // Customize the message as needed
+      const confirmationMessage = 'Are you sure you want to leave? Timer will be reset.';
+      return confirmationMessage;
+    };
+
+    // Add the event listener when the component mounts
+    window.addEventListener('beforeunload', handleWindowUnload);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleWindowUnload);
+    };
+  }, []);
+
   const timer = useRef<NodeJS.Timeout | null>(null);
   let minutes = Math.floor(timeLeft / 60);
 
