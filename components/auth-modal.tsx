@@ -67,7 +67,7 @@ const AuthModal = ({isOpen , setIsOpen}: Props) => {
                 <Label htmlFor="username" className="text-right">
                 Name
                 </Label>
-                <Input id="username" name='username' className="col-span-3" onChange={handleInputChange}/>
+                <Input id="username" name='username' autoComplete='off' className="col-span-3" onChange={handleInputChange}/>
             </div>
             </div>
             <DialogFooter>

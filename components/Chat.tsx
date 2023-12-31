@@ -92,7 +92,7 @@ const Chat = ({ isFocus }: Props) => {
   const isInputEmpty = inputValue.trim().length === 0;
 
   return (
-    <div className="relative md:w-[33rem] md:h-[45rem] w-[20rem] h-[31rem] border-4  rounded-3xl  flex flex-col p-3 ">
+    <div className={`relative md:w-[33rem] md:h-[45rem] w-[20rem] h-[31rem] border-4  rounded-3xl  flex flex-col p-3 ${isFocus ? `blur-sm cursor-not-allowed` :  `blur-0`} `}>
 
       <AuthModal isOpen={isOpen} setIsOpen={setIsOpen}/>
 
@@ -123,7 +123,9 @@ const Chat = ({ isFocus }: Props) => {
             type="text"
             name="content"
             placeholder="Type your message..."
-            className={` w-full flex-grow-0 border ${isFocus ? `bg-[#3B3B3B]` : `bg-blue-600`}  text-white rounded-3xl py-2 px-4 mr-2 focus:outline-none border-transparent`}
+            autoComplete="off"
+            disabled={isFocus}
+            className={` w-full flex-grow-0 border ${isFocus ? `bg-[#3B3B3B] cursor-not-allowed` : `bg-blue-600`}  text-white rounded-3xl py-2 px-4 mr-2 focus:outline-none border-transparent`}
             onChange={handleInputChange}
           />
           <button

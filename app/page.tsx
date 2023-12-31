@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import { DrawerContent } from "@/components/ui/drawer";
 
 export default function Home() {
-  const INITIAL_FOCUS_TIME = 1 * 60;
-  const INITIAL_BREAK_TIME = 2 * 60;
+  const INITIAL_FOCUS_TIME = 25 * 60;
+  const INITIAL_BREAK_TIME = 5 * 60;
 
   const [initialMode, setInitialMode] = useState(true); // true = focus, false = break
   const [isFocus, setIsFocus] = useState(false);
