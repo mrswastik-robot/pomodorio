@@ -25,6 +25,10 @@ export default function Home() {
   const [newFocusTime, setNewFocusTime] = useState('');
   const [newBreakTime, setNewBreakTime] = useState('');
 
+  const audioRef = useRef(new Audio('/power-switch-clicked-on.mp3'));
+  const audioPlay = () => {
+    audioRef.current.play();
+  }
 
   const timer = useRef<NodeJS.Timeout | null>(null);
   let minutes = Math.floor(timeLeft / 60);
@@ -70,6 +74,7 @@ export default function Home() {
   }, [isFocus, focusTime, breakTime, pause, timerResumed]);
 
   const togglePause = () => {
+    audioPlay();
     setPause(prevPause => {
       if (!prevPause) {
         setSavedTime(timeLeft);
@@ -80,6 +85,7 @@ export default function Home() {
   };
 
   const resumeTimer = () => {
+    audioPlay();
     if (!timerResumed) {
       setInitialMode(false);
       setIsFocus(true); // Start in focus mode

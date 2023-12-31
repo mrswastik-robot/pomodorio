@@ -11,6 +11,8 @@ import { arial } from "@/fonts/font";
 import { Rubik } from "next/font/google";
 const rubik = Rubik({ subsets: ["latin"], weight: "500" });
 
+import styles from '@/app/button.module.css'
+
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 import {
   Drawer,
@@ -118,28 +120,40 @@ const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resume
         </CircularProgressbarWithChildren>
       </div>
 
-      <div className=" md:h-[3rem] mt-7  flex items-center justify-center gap-3">
+      <div className=" md:h-[3rem] mt-7  flex items-center justify-center  gap-7 mx-auto">
         {pause ? (
           <Button
             onClick={resumeTimer}
-            className=" bg-white hover:bg-gray-200 h-full w-full text-black rounded-full"
+            className={` ${styles.pushable} `}
           >
-            <Image src={play} width={40} height={40} alt="play" />
+            <span className={`${styles.shadow}`}></span>
+            <span className={`${styles.edge}`}></span>
+            <span className={`${styles.front}`}>
+            <Image src={play} width={30} height={30} alt="play" />             
+            </span>
           </Button>
         ) : (
           <Button
             onClick={togglePause}
-            className=" bg-white hover:bg-gray-200 h-full w-full text-black rounded-full"
+            className={` ${styles.pushable}`}
           >
-            <Image src={pauseSVG} width={40} height={40} alt="pause" />
+            <span className={`${styles.shadow}`}></span>
+            <span className={`${styles.edge}`}></span>
+            <span className={`${styles.front}`}>
+            <Image src={pauseSVG} width={30} height={30} alt="pause" />
+            </span>
           </Button>
         )}
 
-        <div className=" w-full h-full">
+        <div className=" mt-5 ">
           <Drawer>
-            <DrawerTrigger asChild className=" w-full h-full">
-              <Button variant="outline" className="bg-white hover:bg-gray-200 h-full w-full text-black rounded-full">
-                <Image src={settingsPro}  alt="edit" width={40} height={20} className="  "/>
+            <DrawerTrigger asChild className=" ">
+              <Button variant="outline" className={` ${styles.pushable}`}>
+                <span className={`${styles.shadow}`}></span>
+                <span className={`${styles.edge}`}></span>
+                <span className={`${styles.front}`}>
+                <Image src={settingsPro} width={30} height={30} alt="settings" />
+                </span>
               </Button>
             </DrawerTrigger>
             <DrawerContent>
