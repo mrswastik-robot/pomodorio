@@ -122,38 +122,26 @@ const Timer = ({isFocus, formattedTimeLeft, progress, pause, togglePause, resume
 
       <div className=" md:h-[3rem] mt-7  flex items-center justify-center  gap-7 mx-auto">
         {pause ? (
-          <Button
+          <button
             onClick={resumeTimer}
-            className={` ${styles.pushable} `}
+            className={` ${styles.button} w-full  `}
           >
-            <span className={`${styles.shadow}`}></span>
-            <span className={`${styles.edge}`}></span>
-            <span className={`${styles.front}`}>
-            <Image src={play} width={30} height={30} alt="play" />             
-            </span>
-          </Button>
+            <Image src={play} alt="Play" />
+          </button>
         ) : (
-          <Button
+          <button
             onClick={togglePause}
-            className={` ${styles.pushable}`}
+            className={` ${styles.button} w-full `}
           >
-            <span className={`${styles.shadow}`}></span>
-            <span className={`${styles.edge}`}></span>
-            <span className={`${styles.front}`}>
-            <Image src={pauseSVG} width={30} height={30} alt="pause" />
-            </span>
-          </Button>
+            <Image src={pauseSVG} alt="Pause" />
+          </button>
         )}
 
-        <div className=" mt-5 ">
+        <div className=" w-full ">
           <Drawer>
-            <DrawerTrigger asChild className=" ">
-              <Button variant="outline" className={` ${styles.pushable}`}>
-                <span className={`${styles.shadow}`}></span>
-                <span className={`${styles.edge}`}></span>
-                <span className={`${styles.front}`}>
-                <Image src={settingsPro} width={30} height={30} alt="settings" />
-                </span>
+            <DrawerTrigger asChild className=" w-full ">
+              <Button variant="outline" className={` ${styles.button} w-full`}>
+                <Image src={settingsPro} width={20}  alt="EDIT"/>
               </Button>
             </DrawerTrigger>
             <DrawerContent>
