@@ -25,7 +25,7 @@ export default function Home() {
   const [newFocusTime, setNewFocusTime] = useState('');
   const [newBreakTime, setNewBreakTime] = useState('');
 
-  const [audio , setAudio] = useState(new Audio(''));
+  const [audio , setAudio] = useState<HTMLAudioElement | null>(null);
 
   // const audioRef = useRef(new Audio('/power-switch-clicked-on.mp3'));
   // const audioPlay = () => {
@@ -33,12 +33,12 @@ export default function Home() {
   // }
 
   useEffect(() => {
-    setAudio(new Audio('/power-switch-clicked-on-pro.mp3'));
-  }
-  ,[])
+    const audioElement = new Audio('/power-switch-clicked-on-pro.mp3');
+    setAudio(audioElement);
+  }, []);
 
   const audioPlay = () => {
-    audio.play();
+    audio?.play();
   }
 
   const timer = useRef<NodeJS.Timeout | null>(null);
